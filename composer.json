@@ -1,0 +1,38 @@
+{
+    "name": "sofyco/security-validation-bundle",
+    "type": "symfony-bundle",
+    "description": "Security Validation Constraints",
+    "keywords": ["php", "symfony", "bundle", "security", "validation", "constraints"],
+    "homepage": "https://github.com/sofyco/security-validation-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sofy Korzhova",
+            "email": "sofykorzhova@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "symfony/framework-bundle": "^6.2",
+        "symfony/security-bundle": "^6.2",
+        "symfony/validator": "^6.2"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^1.9",
+        "phpunit/phpunit": "^9.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sofyco\\Bundle\\SecurityValidationBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Sofyco\\Bundle\\SecurityValidationBundle\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true
+    }
+}
