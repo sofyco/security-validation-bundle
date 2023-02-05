@@ -71,6 +71,9 @@ jobs:
                     key: ${{ runner.os }}-${{ matrix.php-version }}-composer-${{ hashFiles('composer.json') }}
                     restore-keys: ${{ runner.os }}-${{ matrix.php-version }}-composer-
 
+            -   name: Run tests
+                run: vendor/bin/phpunit --testdox --coverage-clover=coverage.xml
+
             -   name: Send code coverage report to codecov.io
                 env:
                     CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
