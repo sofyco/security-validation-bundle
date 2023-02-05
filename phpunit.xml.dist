@@ -12,6 +12,11 @@
          colors="true"
          failOnRisky="true"
          failOnWarning="true">
+    <php>
+        <server name="APP_DEBUG" value="false"/>
+        <server name="KERNEL_CLASS" value="Sofyco\Bundle\SecurityValidationBundle\Tests\App\Kernel"/>
+    </php>
+
     <testsuites>
         <testsuite name="default">
             <directory>tests</directory>
