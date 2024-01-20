@@ -2,7 +2,10 @@
 
 namespace Sofyco\Bundle\SecurityValidationBundle\Tests\App;
 
+use Sofyco\Bundle\SecurityValidationBundle\SecurityValidationBundle;
+use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
+use Symfony\Bundle\SecurityBundle\SecurityBundle;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 final class Kernel extends \Symfony\Component\HttpKernel\Kernel
@@ -11,16 +14,31 @@ final class Kernel extends \Symfony\Component\HttpKernel\Kernel
 
     public function registerBundles(): iterable
     {
-        yield new \Symfony\Bundle\FrameworkBundle\FrameworkBundle();
-        yield new \Symfony\Bundle\SecurityBundle\SecurityBundle();
-        yield new \Sofyco\Bundle\SecurityValidationBundle\SecurityValidationBundle();
+        yield new FrameworkBundle();
+        yield new SecurityBundle();
+        yield new SecurityValidationBundle();
     }
 
     protected function configureContainer(ContainerConfigurator $container): void
     {
         $container->extension('framework', ['test' => true]);
 
-        $container->services()
+        $container->extension('security', [
+            'providers' => [
+                'users_in_memory' => [
+                    'memory' =>  null,
+                ],
+            ],
+            'firewalls' => [
+                'main' => [
+                    'lazy' => true,
+                    'provider' => 'users_in_memory',
+                ],
+            ],
+        ]);
+
+        $container
+            ->services()
             ->load('Sofyco\Bundle\SecurityValidationBundle\Validator\\', __DIR__ . '/../../src/Validator')
             ->public();
     }
