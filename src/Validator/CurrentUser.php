@@ -8,5 +8,5 @@ use Symfony\Component\Validator\Constraint;
 final class CurrentUser extends Constraint
 {
     public array $roles = [];
-    public string $message = 'validation.user.invalid';
+    public string $message = 'user.invalid';
 }
