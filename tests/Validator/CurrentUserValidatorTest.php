@@ -11,6 +11,9 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
+/**
+ * @extends ConstraintValidatorTestCase<CurrentUserValidator>
+ */
 final class CurrentUserValidatorTest extends ConstraintValidatorTestCase
 {
     private MockObject & Security $security;

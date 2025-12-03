@@ -26,7 +26,7 @@ final class Kernel extends \Symfony\Component\HttpKernel\Kernel
         $container->extension('security', [
             'providers' => [
                 'users_in_memory' => [
-                    'memory' =>  null,
+                    'memory' => null,
                 ],
             ],
             'firewalls' => [

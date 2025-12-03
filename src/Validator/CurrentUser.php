@@ -7,6 +7,8 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute(\Attribute::TARGET_PROPERTY)]
 final class CurrentUser extends Constraint
 {
-    public array $roles = [];
-    public string $message = 'user.invalid';
+    public function __construct(public array $roles = [], public string $message = 'user.invalid')
+    {
+        parent::__construct();
+    }
 }
