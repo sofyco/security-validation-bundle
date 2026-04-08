@@ -3,8 +3,9 @@
 namespace Sofyco\Bundle\SecurityValidationBundle\Repository;
 
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 interface UserPasswordRepositoryInterface
 {
-    public function findByUserIdentifier(string $userIdentifier): ?PasswordAuthenticatedUserInterface;
+    public function findPasswordByUser(UserInterface $user): ?PasswordAuthenticatedUserInterface;
 }

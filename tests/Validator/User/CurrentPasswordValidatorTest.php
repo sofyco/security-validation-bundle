@@ -36,7 +36,7 @@ final class CurrentPasswordValidatorTest extends ConstraintValidatorTestCase
     {
         $this->expectException(UnexpectedTypeException::class);
         $this->security->expects($this->never())->method('getUser');
-        $this->userPasswordRepository->expects($this->never())->method('findByUserIdentifier');
+        $this->userPasswordRepository->expects($this->never())->method('findPasswordByUser');
         $this->passwordHasher->expects($this->never())->method('isPasswordValid');
 
         $this->validator->validate('password', new NotBlank());
@@ -46,7 +46,7 @@ final class CurrentPasswordValidatorTest extends ConstraintValidatorTestCase
     {
         $this->expectException(UnexpectedTypeException::class);
         $this->security->expects($this->never())->method('getUser');
-        $this->userPasswordRepository->expects($this->never())->method('findByUserIdentifier');
+        $this->userPasswordRepository->expects($this->never())->method('findPasswordByUser');
         $this->passwordHasher->expects($this->never())->method('isPasswordValid');
 
         $this->validator->validate(123, new CurrentPassword());
@@ -56,7 +56,7 @@ final class CurrentPasswordValidatorTest extends ConstraintValidatorTestCase
     {
         $this->expectException(UnauthorizedHttpException::class);
         $this->security->expects($this->once())->method('getUser')->willReturn(null);
-        $this->userPasswordRepository->expects($this->never())->method('findByUserIdentifier');
+        $this->userPasswordRepository->expects($this->never())->method('findPasswordByUser');
         $this->passwordHasher->expects($this->never())->method('isPasswordValid');
 
         $this->validator->validate('password', new CurrentPassword());
@@ -70,7 +70,7 @@ final class CurrentPasswordValidatorTest extends ConstraintValidatorTestCase
         $this->security->expects($this->once())->method('getUser')->willReturn($user);
         $this->userPasswordRepository
             ->expects($this->once())
-            ->method('findByUserIdentifier')
+            ->method('findPasswordByUser')
             ->with('user@example.com')
             ->willReturn($account);
         $this->passwordHasher
@@ -93,7 +93,7 @@ final class CurrentPasswordValidatorTest extends ConstraintValidatorTestCase
         $this->security->expects($this->once())->method('getUser')->willReturn($user);
         $this->userPasswordRepository
             ->expects($this->once())
-            ->method('findByUserIdentifier')
+            ->method('findPasswordByUser')
             ->with('user@example.com')
             ->willReturn($account);
         $this->passwordHasher
@@ -115,7 +115,7 @@ final class CurrentPasswordValidatorTest extends ConstraintValidatorTestCase
         $this->security->expects($this->once())->method('getUser')->willReturn($user);
         $this->userPasswordRepository
             ->expects($this->once())
-            ->method('findByUserIdentifier')
+            ->method('findPasswordByUser')
             ->with('user@example.com')
             ->willReturn(null);
         $this->passwordHasher->expects($this->never())->method('isPasswordValid');

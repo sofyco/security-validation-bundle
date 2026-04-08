@@ -32,7 +32,7 @@ final class CurrentPasswordValidator extends ConstraintValidator
             throw new UnauthorizedHttpException(challenge: $value);
         }
 
-        $account = $this->userPasswordRepository->findByUserIdentifier(userIdentifier: $user->getUserIdentifier());
+        $account = $this->userPasswordRepository->findPasswordByUser(user: $user);
 
         if (null !== $account && $this->passwordHasher->isPasswordValid(user: $account, plainPassword: $value)) {
             return;
