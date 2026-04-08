@@ -2,7 +2,7 @@
 
 namespace Sofyco\Bundle\SecurityValidationBundle\Tests\DependencyInjection;
 
-use Sofyco\Bundle\SecurityValidationBundle\Validator\CurrentUserValidator;
+use Sofyco\Bundle\SecurityValidationBundle\Validator\User\CurrentUserValidator;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class SecurityValidationExtensionTest extends KernelTestCase

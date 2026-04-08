@@ -1,7 +1,7 @@
 {
     "name": "sofyco/security-validation-bundle",
     "type": "symfony-bundle",
-    "version": "3.0.0",
+    "version": "3.1.0",
     "description": "Security Validation Constraints",
     "keywords": ["php", "symfony", "bundle", "security", "validation", "constraints"],
     "homepage": "https://github.com/sofyco/security-validation-bundle",
@@ -23,7 +23,7 @@
     },
     "require-dev": {
         "phpstan/phpstan": "^2.1",
-        "phpunit/phpunit": "^12.4"
+        "phpunit/phpunit": "^13.1"
     },
     "autoload": {
         "psr-4": {

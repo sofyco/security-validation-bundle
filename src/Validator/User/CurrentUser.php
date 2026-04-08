@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Sofyco\Bundle\SecurityValidationBundle\Validator;
+namespace Sofyco\Bundle\SecurityValidationBundle\Validator\User;
 
 use Symfony\Component\Validator\Constraint;
 

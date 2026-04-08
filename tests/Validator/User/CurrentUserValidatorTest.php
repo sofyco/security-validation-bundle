@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Sofyco\Bundle\SecurityValidationBundle\Tests\Validator;
+namespace Sofyco\Bundle\SecurityValidationBundle\Tests\Validator\User;
 
 use PHPUnit\Framework\MockObject\MockObject;
-use Sofyco\Bundle\SecurityValidationBundle\Validator\CurrentUser;
-use Sofyco\Bundle\SecurityValidationBundle\Validator\CurrentUserValidator;
+use Sofyco\Bundle\SecurityValidationBundle\Validator\User\CurrentUser;
+use Sofyco\Bundle\SecurityValidationBundle\Validator\User\CurrentUserValidator;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Security\Core\User\InMemoryUser;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -28,13 +28,17 @@ final class CurrentUserValidatorTest extends ConstraintValidatorTestCase
     public function testInvalidConstraint(): void
     {
         $this->expectException(UnexpectedTypeException::class);
+        $this->security->expects($this->never())->method('getUser');
 
         $this->validator->validate('0000-1111-2222-3333', new NotBlank());
     }
 
     public function testValidationSkippedByNonLoggedUser(): void
     {
-        $this->security->method('getUser')->willReturn(null);
+        $this->security
+            ->expects($this->once())
+            ->method('getUser')
+            ->willReturn(null);
 
         $this->validator->validate('0000-1111-2222-3333', new CurrentUser());
 
@@ -46,7 +50,10 @@ final class CurrentUserValidatorTest extends ConstraintValidatorTestCase
         $user = new InMemoryUser(username: '0000-1111-2222-3334', password: null);
         $constraint = new CurrentUser();
 
-        $this->security->method('getUser')->willReturn($user);
+        $this->security
+            ->expects($this->once())
+            ->method('getUser')
+            ->willReturn($user);
 
         $this->validator->validate('0000-1111-2222-3333', $constraint);
 
@@ -57,7 +64,10 @@ final class CurrentUserValidatorTest extends ConstraintValidatorTestCase
     {
         $user = new InMemoryUser(username: '0000-1111-2222-3333', password: null);
 
-        $this->security->method('getUser')->willReturn($user);
+        $this->security
+            ->expects($this->once())
+            ->method('getUser')
+            ->willReturn($user);
 
         $this->validator->validate('0000-1111-2222-3333', new CurrentUser());
 
@@ -71,7 +81,11 @@ final class CurrentUserValidatorTest extends ConstraintValidatorTestCase
         $constraint->roles = ['ROLE_ADMIN'];
 
         $this->security->method('getUser')->willReturn($user);
-        $this->security->method('isGranted')->with('ROLE_ADMIN')->willReturn(true);
+        $this->security
+            ->expects($this->once())
+            ->method('isGranted')
+            ->with('ROLE_ADMIN')
+            ->willReturn(true);
 
         $this->validator->validate('0000-1111-2222-3333', $constraint);
 

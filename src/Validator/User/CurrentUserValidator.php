@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Sofyco\Bundle\SecurityValidationBundle\Validator;
+namespace Sofyco\Bundle\SecurityValidationBundle\Validator\User;
 
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Validator\Constraint;
@@ -27,10 +27,8 @@ final class CurrentUserValidator extends ConstraintValidator
             return;
         }
 
-        foreach ($constraint->roles as $role) {
-            if ($this->security->isGranted($role)) {
-                return;
-            }
+        if (array_any($constraint->roles, fn($role) => $this->security->isGranted($role))) {
+            return;
         }
 
         $this->context->buildViolation($constraint->message)->addViolation();
