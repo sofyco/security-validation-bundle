@@ -3,7 +3,6 @@
 namespace Sofyco\Bundle\SecurityValidationBundle\DependencyInjection;
 
 use Sofyco\Bundle\SecurityValidationBundle\Validator\Cloudflare\Turnstile\CaptchaValidator;
-use Sofyco\Bundle\SecurityValidationBundle\Validator\User\CurrentPasswordValidator;
 use Sofyco\Bundle\SecurityValidationBundle\Validator\User\CurrentUserValidator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -30,7 +29,6 @@ final class SecurityValidationExtension extends Extension
         return [
             CaptchaValidator::class,
             CurrentUserValidator::class,
-            CurrentPasswordValidator::class,
         ];
     }
 }

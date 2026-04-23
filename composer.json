@@ -1,7 +1,7 @@
 {
     "name": "sofyco/security-validation-bundle",
     "type": "symfony-bundle",
-    "version": "3.2.0",
+    "version": "4.0.0",
     "description": "Security Validation Constraints",
     "keywords": ["php", "symfony", "bundle", "security", "validation", "constraints"],
     "homepage": "https://github.com/sofyco/security-validation-bundle",
